@@ -2,6 +2,7 @@
 using Livraria.Models;
 using Livraria.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace Livraria.AutoMappers
 {
@@ -12,6 +13,7 @@ namespace Livraria.AutoMappers
             var config = new AutoMapper.MapperConfiguration(c =>
             {
                 c.CreateMap<LivroViewModel, Livro>();
+                c.CreateMap<Livro, LivroViewModel>();                
             });
 
             IMapper mapper = config.CreateMapper();

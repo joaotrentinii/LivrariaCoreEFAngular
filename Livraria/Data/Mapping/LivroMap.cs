@@ -9,13 +9,20 @@ namespace Livraria.Data.Mapping
         public void Configure(EntityTypeBuilder<Livro> builderLivro)
         {
             builderLivro.Property(l => l.LivroId)
-                .HasColumnName("LivroId");
+                .HasColumnName("LivroId")
+                .UseSqlServerIdentityColumn();
             builderLivro.Property(l => l.Titulo)
                 .HasColumnType("varchar(80)")
                 .HasMaxLength(80)
                 .IsRequired();
-            builderLivro.Property(l => l.QuantidadePaginas)
+            builderLivro.Property(l => l.NomeDoAutor)
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50)
                 .IsRequired();
+            builderLivro.Property(l => l.DataDaPublicacao)
+                .IsRequired();
+            builderLivro.Property(l => l.QuantidadePaginas)
+                .IsRequired();            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Livraria.Data.Mapping;
 using Livraria.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Livraria.Data.Context
 {
@@ -17,6 +18,6 @@ namespace Livraria.Data.Context
         {
             modelBuilder.ApplyConfiguration(new LivroMap());
             base.OnModelCreating(modelBuilder);
-        }
+        }       
     }
 }

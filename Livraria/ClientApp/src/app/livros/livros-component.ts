@@ -19,12 +19,7 @@ export class LivrosComponent {
 interface ILivro {
   livroId: number;
   titulo: string;
+  dataDaPublicacao: Date;
   quantidadePaginas: number;
-  autor: IAutor;
-}
-
-interface IAutor {
-  autorId: number;
-  nome: string;
-  dataNascimento: Date;
+  nomeDoAutor: string;
 }

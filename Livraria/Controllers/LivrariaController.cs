@@ -1,8 +1,9 @@
 ﻿using Livraria.Models;
 using Livraria.Services.Interfaces;
+using Livraria.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Livraria.Controllers
 {
@@ -17,20 +18,25 @@ namespace Livraria.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Livro> ObterLivros()
+        public IEnumerable<LivroViewModel> ObterLivros()
         {
-            return Enumerable.Range(1, 2).Select(livro => new Livro
-            {
-                LivroId = 1,
-                Autor = new Autor()
-                {
-                    AutorId = 1,
-                    DataNascimento = new System.DateTime(1994,08,08),
-                    Nome = "João Paulo Trentini da Silva"
-                },
-                Titulo = "O Livro dos Escolhidos",
-                QuantidadePaginas = 999
-            });
+            return _livroService.GetAll();
+        }
+
+        [HttpGet("[action]")]
+        public LivroViewModel ObterLivroPeloId(int id)
+        {
+            return _livroService.Get(id);
+        }
+
+        public string DeletarLivro(LivroViewModel viewModel)
+        {
+            return _livroService.Delete(viewModel);
+        }
+
+        public void AlterarLivro(LivroViewModel viewModel)
+        {
+            _livroService.Update(viewModel);
         }
     }
 }

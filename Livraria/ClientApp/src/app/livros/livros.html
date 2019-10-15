@@ -7,13 +7,15 @@
     <tr>
       <th>Nome</th>
       <th>Autor</th>
+      <th>Data da Publicação</th>
       <th>Quantidade de Páginas</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let livro of livros">
       <td>{{ livro.titulo }}</td>
-      <td>{{ livro.autor.nome }}</td>
+      <td>{{ livro.nomeDoAutor }}</td>
+      <td>{{ livro.dataDaPublicacao }}</td>
       <td>{{ livro.quantidadePaginas }}</td>
     </tr>
   </tbody>

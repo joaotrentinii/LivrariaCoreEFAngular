@@ -3,7 +3,6 @@ using Livraria.Data.Repository.Interfaces;
 using Livraria.Models;
 using Livraria.Services.Interfaces;
 using Livraria.ViewModels;
-using System;
 using System.Collections.Generic;
 
 namespace Livraria.Services
@@ -26,24 +25,34 @@ namespace Livraria.Services
             _livroRepository.Add(livro);
         }
 
-        public void Delete()
+        public string Delete(LivroViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var livro = _mapper.Map<Livro>(viewModel);
+            ValidarEntity(livro);
+            _livroRepository.Deletar(livro);
+            return "Livro deletado com Sucesso";
         }
 
         public LivroViewModel Get(int id)
         {
-            throw new NotImplementedException();
+            ValidarIdEntity(id);
+            var livro = _livroRepository.BuscarPorId(id);
+            ValidarEntity(livro);
+
+            return _mapper.Map<LivroViewModel>(livro);
         }
 
         public IEnumerable<LivroViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var livros = _mapper.Map<IEnumerable<Livro>, IEnumerable<LivroViewModel>>(_livroRepository.BuscarTodos());
+            return livros;
         }
 
         public void Update(LivroViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var livro = _mapper.Map<Livro>(viewModel);
+            ValidarEntity(livro);
+            _livroRepository.Alterar(livro);           
         }
     }
 }

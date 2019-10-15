@@ -6,7 +6,7 @@ namespace Livraria.Data.Repository.Interfaces
     public interface ILivroRepository
     {
         void Add(Livro livro);
-        void Deletar(int id);
+        void Deletar(Livro livro);
         void Alterar(Livro livro);
         Livro BuscarPorId(int id);
         IEnumerable<Livro> BuscarTodos();
