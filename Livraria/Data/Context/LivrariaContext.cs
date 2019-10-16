@@ -1,7 +1,6 @@
 ﻿using Livraria.Data.Mapping;
 using Livraria.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Livraria.Data.Context
 {
@@ -12,7 +11,11 @@ namespace Livraria.Data.Context
         {
         }
 
-        public DbSet<Livro> Livro { get; set; }
+        public LivrariaContext()
+        {
+        }
+
+        public virtual DbSet<Livro> Livro { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

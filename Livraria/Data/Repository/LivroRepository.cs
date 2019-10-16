@@ -40,7 +40,7 @@ namespace Livraria.Data.Repository
 
         public IEnumerable<Livro> BuscarTodos()
         {
-            return _livrariaContext.Livro.AsEnumerable();
+            return _livrariaContext.Livro;
         }
 
         public void Deletar(Livro livro)
