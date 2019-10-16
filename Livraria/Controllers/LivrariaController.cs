@@ -1,14 +1,13 @@
-﻿using Livraria.Models;
-using Livraria.Services.Interfaces;
+﻿using Livraria.Services.Interfaces;
 using Livraria.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace Livraria.Controllers
 {
     [Route("api/[controller]")]
-    public class LivrariaController : Controller
+    [ApiController]
+    public class LivrariaController : ControllerBase
     {
         private readonly ILivroService _livroService;
 
@@ -17,26 +16,37 @@ namespace Livraria.Controllers
             this._livroService = livroService;
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<LivroViewModel> ObterLivros()
+        [HttpGet]
+        public ActionResult<IEnumerable<LivroViewModel>> ObterLivros()
         {
-            return _livroService.GetAll();
+            return _livroService.GetAll() as List<LivroViewModel>;
         }
 
-        [HttpGet("[action]")]
-        public LivroViewModel ObterLivroPeloId(int id)
+        [HttpGet("{id}")]
+        public ActionResult<LivroViewModel> ObterLivroPeloId(int id)
         {
             return _livroService.Get(id);
         }
 
-        public string DeletarLivro(LivroViewModel viewModel)
+        [HttpPost]
+        public ActionResult<LivroViewModel> AdicionarLivro(LivroViewModel viewModel)
         {
-            return _livroService.Delete(viewModel);
+            _livroService.Add(viewModel);
+            return Ok();
         }
 
-        public void AlterarLivro(LivroViewModel viewModel)
+        [HttpDelete("{id}")]
+        public ActionResult<LivroViewModel> DeletarLivro(int id)
+        {
+            _livroService.Delete(id);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<LivroViewModel> AlterarLivro(int id, LivroViewModel viewModel)
         {
             _livroService.Update(viewModel);
+            return Ok();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Livraria.Services.Interfaces
     {
         void Add(LivroViewModel viewModel);
         void Update(LivroViewModel viewModel);
-        string Delete(LivroViewModel viewModel);
+        void Delete(int id);
         LivroViewModel Get(int id);
         IEnumerable<LivroViewModel> GetAll();
     }

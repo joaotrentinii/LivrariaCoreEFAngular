@@ -18,19 +18,10 @@ namespace Livraria.Services
             this._livroRepository = livroRepository;
         }
 
-        public void Add(LivroViewModel viewModel)
+        public IEnumerable<LivroViewModel> GetAll()
         {
-            var livro = _mapper.Map<Livro>(viewModel);
-            ValidarEntity(livro);
-            _livroRepository.Add(livro);
-        }
-
-        public string Delete(LivroViewModel viewModel)
-        {
-            var livro = _mapper.Map<Livro>(viewModel);
-            ValidarEntity(livro);
-            _livroRepository.Deletar(livro);
-            return "Livro deletado com Sucesso";
+            var livros = _mapper.Map<IEnumerable<Livro>, IEnumerable<LivroViewModel>>(_livroRepository.BuscarTodos());
+            return livros;
         }
 
         public LivroViewModel Get(int id)
@@ -40,13 +31,21 @@ namespace Livraria.Services
             ValidarEntity(livro);
 
             return _mapper.Map<LivroViewModel>(livro);
+        }        
+
+        public void Add(LivroViewModel viewModel)
+        {
+            var livro = _mapper.Map<Livro>(viewModel);
+            ValidarEntity(livro);
+            _livroRepository.Adicionar(livro);
         }
 
-        public IEnumerable<LivroViewModel> GetAll()
+        public void Delete(int id)
         {
-            var livros = _mapper.Map<IEnumerable<Livro>, IEnumerable<LivroViewModel>>(_livroRepository.BuscarTodos());
-            return livros;
-        }
+            var livro = _livroRepository.BuscarPorId(id);
+            ValidarEntity(livro);
+            _livroRepository.Deletar(livro);            
+        }        
 
         public void Update(LivroViewModel viewModel)
         {

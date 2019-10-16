@@ -35,9 +35,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\livros\livros.component.ts" />
+    <None Remove="ClientApp\src\app\livros\livro\livro-model.ts" />
+    <None Remove="ClientApp\src\app\livros\livro\livro.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="Data\Migrations\20191015143022_InitialCreate.cs" />
     <Compile Include="Data\Migrations\20191015143022_InitialCreate.Designer.cs" />
     <Compile Include="Data\Migrations\LivrariaContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livros.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livro\livro-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livro\livro.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

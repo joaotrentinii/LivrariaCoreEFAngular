@@ -17,7 +17,7 @@ namespace Livraria.Data.Repository
             this._livrariaContext = livrariaContext;
         }
 
-        public void Add(Livro livro)
+        public void Adicionar(Livro livro)
         {
             _livrariaContext.Add(livro);
             SalvarAlteracao();
