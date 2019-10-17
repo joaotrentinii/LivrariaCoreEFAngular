@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Livraria.Services
 {
-    public class LivroService : ServiceBase<Livro>, ILivroService
+    public class LivroService : ServiceBase<LivroViewModel>, ILivroService
     {
         private readonly ILivroRepository _livroRepository;
         private readonly IMapper _mapper;
@@ -28,29 +28,28 @@ namespace Livraria.Services
         {
             ValidarIdEntity(id);
             var livro = _livroRepository.BuscarPorId(id);
-            ValidarEntity(livro);
 
             return _mapper.Map<LivroViewModel>(livro);
         }        
 
         public void Add(LivroViewModel viewModel)
         {
-            var livro = _mapper.Map<Livro>(viewModel);
-            ValidarEntity(livro);
+            ValidarEntity(viewModel);
+            var livro = _mapper.Map<Livro>(viewModel);            
             _livroRepository.Adicionar(livro);
         }
 
         public void Delete(int id)
         {
-            var livro = _livroRepository.BuscarPorId(id);
-            ValidarEntity(livro);
+            ValidarIdEntity(id);
+            var livro = _livroRepository.BuscarPorId(id);            
             _livroRepository.Deletar(livro);            
         }        
 
         public void Update(LivroViewModel viewModel)
         {
-            var livro = _mapper.Map<Livro>(viewModel);
-            ValidarEntity(livro);
+            ValidarEntity(viewModel);
+            var livro = _mapper.Map<Livro>(viewModel);            
             _livroRepository.Alterar(livro);           
         }
     }
