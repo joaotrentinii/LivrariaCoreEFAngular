@@ -1,4 +1,5 @@
 ﻿using Livraria.Models;
+using Livraria.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,40 @@ namespace LivrariaTests.LivrariaTestsFakes
                         NomeDoAutor = "Nome do Autor Fake 100",
                         DataDaPublicacao = new DateTime(2018, 04, 04),
                         QuantidadePaginas = 100
+                    }
+                }.AsQueryable();
+            }
+        }
+
+        public static IQueryable<LivroViewModel> LivrosViewFake
+        {
+            get
+            {
+                return new List<LivroViewModel>
+                {
+                    new LivroViewModel
+                    {
+                        LivroId = 1,
+                        Titulo = "Título Livro Fake",
+                        NomeDoAutor = "Nome do Autor Fake",
+                        DataDaPublicacao = new DateTime(2018, 01, 01),
+                        QuantidadePaginas = 201
+                    },
+                    new LivroViewModel
+                    {
+                        LivroId = 2,
+                        Titulo = "Título Livro Fake 02",
+                        NomeDoAutor = "Nome do Autor Fake 02",
+                        DataDaPublicacao = new DateTime(2018, 02, 02),
+                        QuantidadePaginas = 202
+                    },
+                    new LivroViewModel
+                    {
+                        LivroId = 3,
+                        Titulo = "Título Livro Fake 03",
+                        NomeDoAutor = "Nome do Autor Fake 03",
+                        DataDaPublicacao = new DateTime(2018, 03, 03),
+                        QuantidadePaginas = 203
                     }
                 }.AsQueryable();
             }

@@ -18,7 +18,7 @@ namespace Data.Repository
         private Mock<LivrariaContext> _mockContext;        
 
         [SetUp]
-        public void FixtureSetup()
+        public void Setup()
         {
             _listaLivros = LivrariaLivrosFake.LivrosFake;
 
