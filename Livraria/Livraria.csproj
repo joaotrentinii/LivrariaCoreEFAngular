@@ -17,7 +17,16 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Moq" Version="4.13.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,9 +43,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Data\Migrations\20191015032137_InitialCreate.cs" />
-    <Compile Include="Data\Migrations\20191015032137_InitialCreate.Designer.cs" />
+    <None Remove="ClientApp\src\app\livros\livros.component.ts" />
+    <None Remove="ClientApp\src\app\livros\livro\livro-model.ts" />
+    <None Remove="ClientApp\src\app\livros\livro\livro.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Data\Migrations\20191015143022_InitialCreate.cs" />
+    <Compile Include="Data\Migrations\20191015143022_InitialCreate.Designer.cs" />
     <Compile Include="Data\Migrations\LivrariaContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livros.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livro\livro-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\livros\livro\livro.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

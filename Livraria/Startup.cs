@@ -33,6 +33,8 @@ namespace Livraria
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddCors();
+
             Register.RegisterServices(services);
             AutoMapperConfig.RegisterMapper(services);
         }
@@ -53,12 +55,12 @@ namespace Livraria
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseCors(options =>
+            options.WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
+            app.UseMvc();            
 
             app.UseSpa(spa =>
             {                            

@@ -11,12 +11,16 @@ namespace Livraria.Data.Context
         {
         }
 
-        public DbSet<Livro> Livro { get; set; }
+        public LivrariaContext()
+        {
+        }
+
+        public virtual DbSet<Livro> Livro { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new LivroMap());
             base.OnModelCreating(modelBuilder);
-        }
+        }       
     }
 }

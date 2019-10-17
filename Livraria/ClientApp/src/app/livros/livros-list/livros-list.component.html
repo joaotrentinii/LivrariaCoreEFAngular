@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Data da Publicação</th>
+      <th>Quantidade de Páginas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let livro of service.livros">
+      <td>{{ livro.titulo }}</td>
+      <td>{{ livro.nomeDoAutor }}</td>
+      <td>{{ livro.dataDaPublicacao }}</td>
+      <td>{{ livro.quantidadePaginas }}</td>
+      <td (click)="populateForm(livro)">
+        <button class="btn btn-success"><i class="far fa-trash-alt fa-lg text-danger"></i> Editar</button>
+      </td>
+      <td (click)="onDelete(livro.livroId)">
+        <button class="btn btn-success"><i class="far fa-trash-alt fa-lg text-danger"></i> Deletar</button>
+      </td>
+    </tr>    
+  </tbody>
+</table>

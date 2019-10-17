@@ -1,10 +1,10 @@
 ﻿using Livraria.Data.Context;
 using Livraria.Data.Repository.Interfaces;
 using Livraria.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Livraria.Data.Repository
 {
@@ -17,7 +17,7 @@ namespace Livraria.Data.Repository
             this._livrariaContext = livrariaContext;
         }
 
-        public void Add(Livro livro)
+        public void Adicionar(Livro livro)
         {
             _livrariaContext.Add(livro);
             SalvarAlteracao();
@@ -25,27 +25,43 @@ namespace Livraria.Data.Repository
 
         public void Alterar(Livro livro)
         {
-            
-        }
+            var livroEntity = _livrariaContext.Livro.Where(l => l.LivroId == livro.LivroId).FirstOrDefault();
+
+            if (livroEntity == null)
+                throw new ArgumentException("Não foi possível atualizar o livro, pois não foi encontrado um livro com o id informado.");
+
+            AplicarAlteracoesLivro(livro, livroEntity);            
+        }        
 
         public Livro BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return _livrariaContext.Livro.AsNoTracking().Where(l => l.LivroId == id).FirstOrDefault();
         }
 
         public IEnumerable<Livro> BuscarTodos()
         {
-            throw new NotImplementedException();
+            return _livrariaContext.Livro.OrderBy(l => l.Titulo);
         }
 
-        public void Deletar(int id)
+        public void Deletar(Livro livro)
         {
-            throw new NotImplementedException();
+            _livrariaContext.Livro.Remove(livro);
+            SalvarAlteracao();
         }
 
         private void SalvarAlteracao()
         {
             _livrariaContext.SaveChanges();
+        }
+
+        private void AplicarAlteracoesLivro(Livro livro, Livro livroEntity)
+        {
+            livroEntity.DataDaPublicacao = livro.DataDaPublicacao;
+            livroEntity.QuantidadePaginas = livro.QuantidadePaginas;
+            livroEntity.Titulo = livro.Titulo;
+            livroEntity.NomeDoAutor = livro.NomeDoAutor;
+
+            SalvarAlteracao();
         }
     }
 }

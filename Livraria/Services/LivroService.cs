@@ -3,12 +3,11 @@ using Livraria.Data.Repository.Interfaces;
 using Livraria.Models;
 using Livraria.Services.Interfaces;
 using Livraria.ViewModels;
-using System;
 using System.Collections.Generic;
 
 namespace Livraria.Services
 {
-    public class LivroService : ServiceBase<Livro>, ILivroService
+    public class LivroService : ServiceBase<LivroViewModel>, ILivroService
     {
         private readonly ILivroRepository _livroRepository;
         private readonly IMapper _mapper;
@@ -19,31 +18,39 @@ namespace Livraria.Services
             this._livroRepository = livroRepository;
         }
 
-        public void Add(LivroViewModel viewModel)
+        public IEnumerable<LivroViewModel> GetAll()
         {
-            var livro = _mapper.Map<Livro>(viewModel);
-            ValidarEntity(livro);
-            _livroRepository.Add(livro);
-        }
-
-        public void Delete()
-        {
-            throw new NotImplementedException();
+            var livros = _mapper.Map<IEnumerable<Livro>, IEnumerable<LivroViewModel>>(_livroRepository.BuscarTodos());
+            return livros;
         }
 
         public LivroViewModel Get(int id)
         {
-            throw new NotImplementedException();
+            ValidarIdEntity(id);
+            var livro = _livroRepository.BuscarPorId(id);
+
+            return _mapper.Map<LivroViewModel>(livro);
+        }        
+
+        public void Add(LivroViewModel viewModel)
+        {
+            ValidarEntity(viewModel);
+            var livro = _mapper.Map<Livro>(viewModel);            
+            _livroRepository.Adicionar(livro);
         }
 
-        public IEnumerable<LivroViewModel> GetAll()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            ValidarIdEntity(id);
+            var livro = _livroRepository.BuscarPorId(id);            
+            _livroRepository.Deletar(livro);            
+        }        
 
         public void Update(LivroViewModel viewModel)
         {
-            throw new NotImplementedException();
+            ValidarEntity(viewModel);
+            var livro = _mapper.Map<Livro>(viewModel);            
+            _livroRepository.Alterar(livro);           
         }
     }
 }
